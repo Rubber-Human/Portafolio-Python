@@ -1,7 +1,7 @@
 def printBoard(tablero):
     print('   1    2    3')
     for r in range(3):
-        print(f'{r} {tablero[r]}')
+        print(f'{r+1} {tablero[r]}')
 
 def putTile(tablero, x, y, ficha):
     coordX = int(x)-1
@@ -23,23 +23,37 @@ def putTile(tablero, x, y, ficha):
             print('Esta celda ya está ocupada')
             return tablero
 
-filas = 3
-columnas = 3
-coordX = 0
-coordY = 0
-ficha = ''
-juegoActivo = True
+def checkWinner(tablero, conteo):
+    for m in range(3):
+        for n in range(3):
+            if tablero[m][n] != '':
+                conteo += 1
+            if conteo == 9:
+                print('Fin del juego')
+                return False, conteo
+            else:
+                return True, conteo
 
-tablero = [['']*columnas for i in range (filas)]
+def main():
+    filas = 3
+    columnas = 3
+    coordX = 0
+    coordY = 0
+    ficha = ''
+    juegoActivo = True
+    celdasOcupadas = 0
 
-printBoard(tablero)
-
-while(juegoActivo):
-    
-    coordX = input('Introduce la coordenada X del 1 al 3: ')
-    coordY = input('Introduce la coordenada Y del 1 al 3: ')
-    ficha = input('Introduce 0 para círculo o X para cruz: ')
-
-    tablero = putTile(tablero, coordX, coordY, ficha)
+    tablero = [['']*columnas for i in range (filas)]
 
     printBoard(tablero)
+
+    while(juegoActivo):
+    
+        coordX = input('Introduce la coordenada X del 1 al 3: ')
+        coordY = input('Introduce la coordenada Y del 1 al 3: ')
+        ficha = input('Introduce 0 para círculo o X para cruz: ')
+
+        tablero = putTile(tablero, coordX, coordY, ficha)
+
+        printBoard(tablero)
+        juegoActivo, celdasOcupadas = checkWinner(tablero, celdasOcupadas)
