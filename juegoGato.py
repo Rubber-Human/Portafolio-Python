@@ -24,6 +24,36 @@ def putTile(tablero, x, y, ficha):
             return tablero
 
 def checkWinner(tablero, conteo):
+    # Evalúa las filas son iguales para determinar un ganador
+    if tablero[0][0] == tablero[0][1] and tablero [0][0] == tablero[0][2] and tablero[0][0] != '':
+        print(f'Fin del juego. Ganador: ficha {tablero[0][0]}')
+        return False, conteo
+    if tablero[1][0] == tablero[1][1] and tablero [1][0] == tablero[1][2] and tablero[1][0] != '':
+        print(f'Fin del juego. Ganador: ficha {tablero[1][0]}')
+        return False, conteo
+    if tablero[2][0] == tablero[2][1] and tablero [2][0] == tablero[2][2] and tablero[2][0] != '':
+        print(f'Fin del juego. Ganador: ficha {tablero[2][0]}')
+        return False, conteo
+    
+    # Evalúa las columnas son iguales para determinar un ganador
+    if tablero[0][0] == tablero[1][0] and tablero [0][0] == tablero[2][0] and tablero[0][0] != '':
+        print(f'Fin del juego. Ganador: ficha {tablero[0][0]}')
+        return False, conteo
+    if tablero[0][1] == tablero[1][1] and tablero [0][1] == tablero[2][1] and tablero[0][1] != '':
+        print(f'Fin del juego. Ganador: ficha {tablero[0][1]}')
+        return False, conteo
+    if tablero[0][2] == tablero[1][2] and tablero [0][2] == tablero[2][2] and tablero[0][2] != '':
+        print(f'Fin del juego. Ganador: ficha {tablero[0][2]}')
+        return False, conteo
+        
+        # Evalúa si las diagonales son iguales y determina un ganador
+    if tablero[0][0] == tablero[1][1] and tablero [0][0] == tablero[2][2] and tablero[0][0] != '':
+        print(f'Fin del juego. Ganador: ficha {tablero[0][0]}')
+        return False, conteo
+    if tablero[0][2] == tablero[1][1] and tablero [0][2] == tablero[2][0] and tablero[0][2] != '':
+        print(f'Fin del juego. Ganador: ficha {tablero[0][2]}')
+        return False, conteo
+    
     for m in range(3):
         for n in range(3):
             if tablero[m][n] != '':
@@ -33,6 +63,8 @@ def checkWinner(tablero, conteo):
                 return False, conteo
             else:
                 return True, conteo
+            
+
 
 def main():
     filas = 3
@@ -57,3 +89,5 @@ def main():
 
         printBoard(tablero)
         juegoActivo, celdasOcupadas = checkWinner(tablero, celdasOcupadas)
+
+main()
